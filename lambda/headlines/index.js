@@ -6,22 +6,22 @@ const s3 = new aws.S3();
 const lambda = new aws.Lambda({region: "eu-west-1"});
 const sites = [
     "https://www.idnes.cz/",
-    "https://www.lidovky.cz/",
-    "https://www.novinky.cz/",
-    "https://www.aktualne.cz/",
-    "https://ihned.cz/",
-    "https://www.irozhlas.cz/",
-    "https://denikn.cz/",
-    "https://www.denik.cz/",
-    "https://www.bbc.com/",
-    "http://wyborcza.pl/",
-    "https://www.spiegel.de/",
-    "https://www.ft.com/",
-    "https://www.seznamzpravy.cz/",
-    "https://www.blesk.cz/",
-    "https://www.e15.cz/"
+  //  "https://www.lidovky.cz/",
+  //  "https://www.novinky.cz/",
+  //  "https://www.aktualne.cz/",
+  //  "https://ihned.cz/",
+  //  "https://www.irozhlas.cz/",
+  //  "https://denikn.cz/",
+  //  "https://www.denik.cz/",
+  //  "https://www.bbc.com/",
+  //  "http://wyborcza.pl/",
+  //  "https://www.spiegel.de/",
+  //  "https://www.ft.com/",
+  //  "https://www.seznamzpravy.cz/",
+  //  "https://www.blesk.cz/",
+  //  "https://www.e15.cz/"
 ];
-const bucket = "lidovky-headlines";
+const bucket = "noviny";
 
 const process = (url) => {
     const id = toId(url);
@@ -103,5 +103,5 @@ exports.handler = async (event, context, callback) => {
     const ids = await Promise.all(sites.map(process));
     const idList = ids.join("\n") + "\n";
     await appendToFile(bucket, "list.txt", idList);
-    await callParser();
+    // await callParser();
 };
