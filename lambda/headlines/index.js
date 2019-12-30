@@ -14,7 +14,6 @@ const sites = [
     "https://denikn.cz/",
     "https://www.denik.cz/",
     "https://www.bbc.com/",
-    "https://www.lemonde.fr/",
     "http://wyborcza.pl/",
     "https://www.spiegel.de/",
     "https://www.ft.com/",
