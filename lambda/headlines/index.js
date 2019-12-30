@@ -6,6 +6,10 @@ const s3 = new aws.S3();
 const lambda = new aws.Lambda({region: "eu-west-1"});
 const sites = [
     "https://www.idnes.cz/",
+    "https://sport.idnes.cz/",
+    "https://isport.blesk.cz/",
+    "https://www.sport.cz",
+    "https://sports.yahoo.com",
   //  "https://www.lidovky.cz/",
   //  "https://www.novinky.cz/",
   //  "https://www.aktualne.cz/",
@@ -92,7 +96,7 @@ const appendToFile = async (Bucket, Key, appendage) => {
 
 const callParser = async () => new Promise((resolve, reject) => {
     lambda.invoke({
-        FunctionName: "arn:aws:lambda:eu-west-1:558611468927:function:headline-parser-development",
+        FunctionName: "arn:aws:lambda:eu-west-1:533304289165:function:headline-parser-development",
         InvocationType: "Event"
     }, (err, response) => {
         err ? reject(err) : resolve();
@@ -103,5 +107,5 @@ exports.handler = async (event, context, callback) => {
     const ids = await Promise.all(sites.map(process));
     const idList = ids.join("\n") + "\n";
     await appendToFile(bucket, "list.txt", idList);
-    // await callParser();
+  //  await callParser();
 };

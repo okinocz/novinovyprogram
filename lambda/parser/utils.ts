@@ -7,7 +7,7 @@ import {TitulkaResult} from "./parsers/alza";
 
 const s3 = new S3();
 
-const Bucket = "lidovky-headlines";
+const Bucket = "noviny";
 http.globalAgent.maxSockets = 100;
 https.globalAgent.maxSockets = 100;
 export const downloadObject = (Key: string): Promise<Buffer> => new Promise<Buffer>((resolve, reject) => {

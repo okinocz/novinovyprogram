@@ -30,6 +30,7 @@ exports.handler = async () => {
     if(remainingList.length) {
         files.length = maxFilesAtOnce;
     }
+    
     console.log(`Processing ${files.length} files`, files.map(f => f.filename));
     const openFiles = new Map<string, Promise<PublicationDay>>();
     await Promise.all(files
@@ -47,14 +48,14 @@ exports.handler = async () => {
     }));
     console.log('resetting list, remaining: ', remainingList.length);
     await setCurrentList(remainingList.join("\n") + "\n");
-    if(remainingList.length) {
-        await callParser();
-    }
+    // if(remainingList.length) {
+    //    await callParser();
+    // }
 };
 
 const callParser = async () => new Promise((resolve, reject) => {
     lambda.invoke({
-        FunctionName: "arn:aws:lambda:eu-west-1:558611468927:function:headline-parser-development",
+        FunctionName: "arn:aws:lambda:eu-west-1:533304289165:function:headline-parser-development", 
         InvocationType: "Event"
     }, (err, response) => {
         err ? reject(err) : resolve(response);
